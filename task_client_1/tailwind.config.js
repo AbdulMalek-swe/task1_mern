@@ -8,7 +8,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'formImg': "url('/form.jpg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
+      colors: {
+        'formdowncolor1': '#000000d2',
+        'formdowncolor2': '#000000b3',
+      },
+    },
   },
   plugins: [],
 }
