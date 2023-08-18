@@ -13,9 +13,8 @@ export default function App({ Component, pageProps }) {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Component {...pageProps} /> 
+       <Component {...pageProps} /> 
       </ThemeProvider>
-    
     </StyledEngineProvider>
   ) 
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
- 
+
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -19,45 +19,61 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useState } from "react";
 import { Avatar } from "@mui/material";
+import Image from "next/image";
 
 const drawerWidth = 240;
-function Layout({children,props}) {
-  const   window   = props;
-  const [mobileOpen, setMobileOpen] =  useState(false);
+function Layout({ children, props }) {
+  const window = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
   const data = [
     {
-        path:"/home/contact",
-        content:"contact",
+      path: "/home/contact",
+      content: "Dashboard",
+      icon: "/home-trend-up.svg"
     },
     {
-        path:"/home/about",
-        content:"about",
+      path: "/home/about",
+      content: "stock",
+      icon: "/status-up.svg"
     },
-]
+    {
+      path: "/dashboard/user/user",
+      content: "notification",
+      icon: "/notification-circle.svg"
+    },
+  ]
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const dashboardHead = "Stock"
   const drawer = (
-    <div>
-        <img   alt='loading...' className='w-full h-16 border'/>
-      <Toolbar />
-      <Divider />
+    <div  >
+      <img src="/Logo.svg" alt='loading...' className='w-full h-16 mt-6 mb-8' />
       <List>
-      {data.map(({path,content},index)=> 
-      <Link href={path} key={index}>
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-              </ListItemIcon>
-              <ListItemText primary={content} />
-            </ListItemButton>
-          </ListItem></Link>
+       
+          <div className='flex items-center justify-between uppercase text-gray-400 mx-3'>
+            <div className="text-sm"> business</div>
+            <div>
+            <Image src='/add.svg'   width={30} height={30} className="bg-gray-200 filter saturate-0 hover:saturate-100"
+               />
+            </div>
+          </div>
+       
+        {data.map(({ path, content, icon }, index) =>
+          <Link href={path} key={index}>
+            <ListItem key={index} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Image src={icon} alt="loading..." width={20} height={100} />
+                </ListItemIcon>
+                <ListItemText primary={content} className="-ml-7 mt-2  capitalize" />
+              </ListItemButton>
+            </ListItem></Link>
         )}
       </List>
-        <>sdfsdf</>
+
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['All mail' ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -80,9 +96,10 @@ function Layout({children,props}) {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          ml: { sm: `${drawerWidth}px` }, boxShadow: "0px 0px 0px red",
+
         }}
-        className='border bg-white text-black'
+        className=' border border-b-gray-300/80 bg-white text-black py-4'
       >
         <Toolbar  >
           <IconButton
@@ -93,16 +110,20 @@ function Layout({children,props}) {
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
             <MenuIcon />
-          </IconButton>sdf
-           <div className='w-full flex justify-end'>
-           <IconButton  sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-              <div className='mx-2 text-center'>
-                  <Link>sign up</Link>
-              </div>
-              
-           </div>
+          </IconButton>
+          <h1 className="-ml-2 xl:text2xl md:text-xl text-lg"> {dashboardHead}</h1>
+          <div className='w-full flex justify-end items-center'>
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+            <div className='mx-2 text-center'>
+              <Link href="">Log in</Link>
+            </div>
+            <div className='mx-2 text-left'>
+              <p className="xl:text-lg text-base">Esther Howard</p>
+              <span className="lg:text-base text-xs">howare@property.com</span>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Box
@@ -139,10 +160,10 @@ function Layout({children,props}) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 2, mt: 5, ml: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-         {children}
+        {children}
       </Box>
     </Box>
   );
